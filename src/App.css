@@ -1,21 +1,8 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  padding: 10px;
+  
 }
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-h1,
-h2 {
-  margin-bottom: 10px;
-}
-
-
 
 button {
   padding: 5px 10px;
@@ -30,13 +17,21 @@ button {
   flex-flow: row wrap;
   justify-content: space-between;
   row-gap: 10px;
-  column-gap: 20px;
-  
+  column-gap: 30px;
+  margin-top:8em;
+  padding: 0.3em;
 }
 
+.dashboard-container .photo-list {
+  margin-top:0.2em
+}
+
+.title {
+  margin-top: 5em;
+}
 .photo-image {
-  width:20em;
-  height: 20em;
+  width:30em;
+  height: 30em;
   object-fit: cover;
 }
 
@@ -50,7 +45,7 @@ button {
 }
 
 .item {
-  flex:10
+  flex:1
 }
 
 .loader {
@@ -70,6 +65,19 @@ button {
   animation: spin 1s linear infinite;
   margin: 2px;
 }
+.header {
+  align-items: center;
+  background: #555;
+  color: #f1f1f1;
+  position: fixed;
+  width:100%;
+  z-index:1;
+  top:0;
+  display: flex;
+  justify-content: space-between;
+}
+
+
 
 @keyframes spin {
   0% {

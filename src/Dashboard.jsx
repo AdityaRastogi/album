@@ -1,24 +1,28 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PhotoItem from './PhotoItem';
 import { addFavorite, removeFavorite } from './utils/slices/dashboardSlice';
 
 const Dashboard = () => {
   const favorites = useSelector((state) => state.dashboard.favorites);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <Link to="/list">Go to List</Link>
-      <h2>Favorites</h2>
+    <div className='dashboard-container'>
+        <div className='header'>
+        <h1>Dashboard</h1>
+        <button onClick={()=>navigate("/list")}>Go to list</button>
+        </div>
+      
+        <h2 className='title'>Favorites</h2>
       <div className='photo-list'>
-        {favorites.map((photo,index) => (
-         <div className="item" key={photo.id+index}>
+      
+        {favorites.map((photo) => (
+         <div className="item" key={photo?.id}>
             <PhotoItem photo={photo} isDashboard={true} />
           </div>
         ))}
