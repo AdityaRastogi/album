@@ -1,7 +1,7 @@
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import './App.css';
+import './App.scss';
 import Dashboard from "./Dashboard";
 import List from "./List";
 import Error from "./Error";
