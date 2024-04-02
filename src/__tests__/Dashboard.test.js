@@ -1,28 +1,26 @@
 // Dashboard.test.js
 
-import React from 'react';
+import React from "react";
 import { Provider } from "react-redux";
-import { act, fireEvent, render, screen } from '@testing-library/react';
-import Dashboard from '../Dashboard';
-import { Constants } from '../utils/appConstants';
-import PhotoItem from '../PhotoItem'; // Mock PhotoItem if needed
-import appStore from '../utils/appStore';
-import { BrowserRouter } from 'react-router-dom';
-import List from '../List';
+import { act, fireEvent, render } from "@testing-library/react";
+import Dashboard from "../Dashboard";
+import appStore from "../utils/appStore";
+import { BrowserRouter } from "react-router-dom";
+import List from "../List";
 
-jest.mock('../utils/appConstants'); 
+jest.mock("../utils/appConstants");
 
 window.scrollTo = jest.fn();
 
-describe('Dashboard component', () => {
+describe("Dashboard component", () => {
   test("should load", async () => {
     const dashboard = async () =>
       await act(async () =>
         render(
           <BrowserRouter>
-          <Provider store={appStore}>
-            <Dashboard />
-          </Provider>
+            <Provider store={appStore}>
+              <Dashboard />
+            </Provider>
           </BrowserRouter>,
         ),
       );
@@ -90,17 +88,19 @@ describe('Dashboard component', () => {
           <BrowserRouter>
             <Provider store={appStore}>
               <Dashboard />
-              <List/>
+              <List />
             </Provider>
           </BrowserRouter>,
         ),
       );
 
-      const { getByTestId } = await dashboard();
+    const { getByTestId } = await dashboard();
 
-      const dashboardGoToListButton = getByTestId("dashboard-go-to-list-button");
-      await act(() => { fireEvent.click(dashboardGoToListButton) })
-      const listPage = getByTestId("list-page");
-      expect(listPage).toBeDefined();
+    const dashboardGoToListButton = getByTestId("dashboard-go-to-list-button");
+    await act(() => {
+      fireEvent.click(dashboardGoToListButton);
+    });
+    const listPage = getByTestId("list-page");
+    expect(listPage).toBeDefined();
   });
 });

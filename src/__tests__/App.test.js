@@ -5,15 +5,15 @@ import { Provider } from "react-redux";
 import "@testing-library/jest-dom";
 import { act } from "react-dom/test-utils";
 import { render } from "@testing-library/react";
-import { createBrowserRouter } from 'react-router-dom'; 
-import appStore from "../utils/appStore"
+import { createBrowserRouter } from "react-router-dom";
+import appStore from "../utils/appStore";
 import App from "../App";
-import Dashboard from '../Dashboard';
-import List from '../List';
-import Error from '../Error';
+import Dashboard from "../Dashboard";
+import List from "../List";
+import Error from "../Error";
 
 describe("App", () => {
-      // Mock router instance
+  // Mock router instance
   const mockedRouter = createBrowserRouter([
     {
       path: "/",
@@ -41,5 +41,4 @@ describe("App", () => {
     const applayout = getByTestId("app");
     expect(applayout).toBeDefined();
   });
-  
 });

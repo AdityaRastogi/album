@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   photos: [],
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const listSlice = createSlice({
-  name: 'list',
+  name: "list",
   initialState,
   reducers: {
     fetchPhotosRequest: (state) => {

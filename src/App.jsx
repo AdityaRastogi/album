@@ -1,7 +1,6 @@
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import './App.scss';
+import "./App.scss";
 import Dashboard from "./Dashboard";
 import List from "./List";
 import Error from "./Error";
@@ -10,9 +9,9 @@ import appStore from "./utils/appStore";
 function App() {
   return (
     <Provider store={appStore}>
-    <div data-testid="app" className="h-screen w-screen bg-black">
-    <RouterProvider router={appRouter} />
-    </div>
+      <div data-testid="app">
+        <RouterProvider router={appRouter} />
+      </div>
     </Provider>
   );
 }

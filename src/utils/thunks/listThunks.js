@@ -1,5 +1,9 @@
-import { fetchPhotosRequest, fetchPhotosSuccess, fetchPhotosFailure } from '../slices/listSlice';
-import api from '../api/api';
+import {
+  fetchPhotosRequest,
+  fetchPhotosSuccess,
+  fetchPhotosFailure,
+} from "../slices/listSlice";
+import api from "../api/api";
 
 export const fetchPhotos = () => async (dispatch, getState) => {
   const { list } = getState();
