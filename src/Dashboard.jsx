@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import PhotoItem from './PhotoItem';
-import { addFavorite, removeFavorite } from './utils/slices/dashboardSlice';
+import { Constants } from './utils/appConstants';
 
 const Dashboard = () => {
   const favorites = useSelector((state) => state.dashboard.favorites);
@@ -12,13 +12,13 @@ const Dashboard = () => {
   
 
   return (
-    <div className='dashboard-container'>
+    <div data-testid="dashboard" className='dashboard-container'>
         <div className='header'>
-        <h1>Dashboard</h1>
-        <button onClick={()=>navigate("/list")}>Go to list</button>
+        <h1 data-testid="dashboard-heading">{Constants.dashboardPage.title}</h1>
+        <button data-testid="dashboard-go-to-list-button" onClick={()=>navigate("/list")}>{Constants.buttons.goToList}</button>
         </div>
       
-        <h2 className='title'>Favorites</h2>
+        <h2 data-testid="dashboard-sub-heading-favorites" className='title'>{Constants.dashboardPage.subHeading}</h2>
       <div className='photo-list'>
       
         {favorites.map((photo) => (

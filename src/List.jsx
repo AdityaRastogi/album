@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link,useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PhotoItem from './PhotoItem';
 import Loader from './Loader';
 import { useNavigate } from 'react-router-dom';
@@ -9,12 +9,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import api from './utils/api/api';
 import { fetchPhotos } from './utils/thunks/listThunks';
-import { addFavorite, removeFavorite } from './utils/slices/dashboardSlice';
+import { Constants } from './utils/appConstants';
 const List = () => {
- const { photos, loading, error, page, scrollPosition } = useSelector((state) => state.list);
-const [initDone,setInitDone] = useState(false)
+ const { photos, loading, error,  scrollPosition } = useSelector((state) => state.list);
+
   const dispatch = useDispatch();
-  const observerRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation(); // Get current location for scroll restoration
   const scrollRef = useRef(null);
@@ -36,7 +35,6 @@ const [initDone,setInitDone] = useState(false)
 
 
   useEffect(() => {
-    // Restore scroll position on component mount and location change
     if (location.pathname === '/list') {
       window.scrollTo(0, scrollPosition);
     }
@@ -46,8 +44,9 @@ const [initDone,setInitDone] = useState(false)
             try {
               dispatch(fetchPhotosRequest());
               const response = await api.fetchPhotos(1);
-              setInitDone(true);
-              dispatch(fetchPhotosSuccess(response.data));
+              const responseJson = await response.json();
+            
+              dispatch(fetchPhotosSuccess(responseJson));
             } catch (error) {
               dispatch(fetchPhotosFailure(error));
             }
@@ -69,16 +68,16 @@ const [initDone,setInitDone] = useState(false)
   
 
   return (
-    <div className="list-container"  ref={scrollRef}>
+    <div data-testid="list-page" className="list-container"  ref={scrollRef}>
         <div className='header'>
-        <h1>List</h1>
-      <button onClick={handleBack}>Back</button>
+        <h1>{Constants.listPage.title}</h1>
+      <button data-testid="list-back-button" onClick={handleBack}>{Constants.buttons.back}</button>
         </div>
     
 
       {error && <p>Error fetching photos: {error.message}</p>}
       {loading && <Loader />}
-      {!loading && !error && photos.length === 0 && <p>No photos found.</p>}
+      {!loading && !error && photos.length === 0 && <p>{Constants.listPage.error.noPhotoFound}</p>}
       {!loading && !error && (
          <InfiniteScroll
          dataLength={photos.length} // Pass the length of loaded items

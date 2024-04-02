@@ -8,7 +8,8 @@ export const fetchPhotos = () => async (dispatch, getState) => {
   dispatch(fetchPhotosRequest());
   try {
     const response = await api.fetchPhotos(list.page);
-    dispatch(fetchPhotosSuccess(response.data));
+    const responseJson = await response.json();
+    dispatch(fetchPhotosSuccess(responseJson));
   } catch (error) {
     dispatch(fetchPhotosFailure(error));
   }

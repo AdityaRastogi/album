@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch,useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from './utils/slices/dashboardSlice';
+import { Constants } from './utils/appConstants';
 
 const PhotoItem = ({ photo,isDashboard }) => {
 const [isFavorite, setIsFavorite] = useState(false);
@@ -25,7 +26,7 @@ useEffect(()=>{
       <img className="photo-image" src={photo.thumbnailUrl} alt={photo.title} />
       <h3>{photo.title}</h3>
       {!isDashboard && <button className='photo-button' onClick={() => handleFavoriteFromList(photo)}>
-        {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        {isFavorite ? Constants.buttons.removeFromFavorites : Constants.buttons.addToFavorites}
       </button>}
     </div>
   );
